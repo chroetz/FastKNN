@@ -10,9 +10,21 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
+// distSqrToVec
+NumericVector distSqrToVec(NumericMatrix target, NumericVector query);
+RcppExport SEXP _FastKNN_distSqrToVec(SEXP targetSEXP, SEXP querySEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type target(targetSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type query(querySEXP);
+    rcpp_result_gen = Rcpp::wrap(distSqrToVec(target, query));
+    return rcpp_result_gen;
+END_RCPP
+}
 // buildKnnTree
 List buildKnnTree(NumericMatrix target, int k);
-RcppExport SEXP _RANN_buildKnnTree(SEXP targetSEXP, SEXP kSEXP) {
+RcppExport SEXP _FastKNN_buildKnnTree(SEXP targetSEXP, SEXP kSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -24,7 +36,7 @@ END_RCPP
 }
 // queryKnnTree
 List queryKnnTree(NumericVector query, int k, List pointers);
-RcppExport SEXP _RANN_queryKnnTree(SEXP querySEXP, SEXP kSEXP, SEXP pointersSEXP) {
+RcppExport SEXP _FastKNN_queryKnnTree(SEXP querySEXP, SEXP kSEXP, SEXP pointersSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
@@ -37,7 +49,7 @@ END_RCPP
 }
 // destroyKnnTree
 void destroyKnnTree(List pointers);
-RcppExport SEXP _RANN_destroyKnnTree(SEXP pointersSEXP) {
+RcppExport SEXP _FastKNN_destroyKnnTree(SEXP pointersSEXP) {
 BEGIN_RCPP
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< List >::type pointers(pointersSEXP);
@@ -47,13 +59,14 @@ END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
-    {"_RANN_buildKnnTree", (DL_FUNC) &_RANN_buildKnnTree, 2},
-    {"_RANN_queryKnnTree", (DL_FUNC) &_RANN_queryKnnTree, 3},
-    {"_RANN_destroyKnnTree", (DL_FUNC) &_RANN_destroyKnnTree, 1},
+    {"_FastKNN_distSqrToVec", (DL_FUNC) &_FastKNN_distSqrToVec, 2},
+    {"_FastKNN_buildKnnTree", (DL_FUNC) &_FastKNN_buildKnnTree, 2},
+    {"_FastKNN_queryKnnTree", (DL_FUNC) &_FastKNN_queryKnnTree, 3},
+    {"_FastKNN_destroyKnnTree", (DL_FUNC) &_FastKNN_destroyKnnTree, 1},
     {NULL, NULL, 0}
 };
 
-RcppExport void R_init_RANN(DllInfo *dll) {
+RcppExport void R_init_FastKNN(DllInfo *dll) {
     R_registerRoutines(dll, NULL, CallEntries, NULL, NULL);
     R_useDynamicSymbols(dll, FALSE);
 }

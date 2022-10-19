@@ -1,5 +1,8 @@
+#' @keywords internal
+"_PACKAGE"
+
 ## usethis namespace: start
 #' @importFrom Rcpp sourceCpp
-#' @useDynLib RANN, .registration = TRUE
+#' @useDynLib FastKNN, .registration = TRUE
 ## usethis namespace: end
 NULL

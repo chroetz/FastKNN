@@ -440,7 +440,7 @@ static ANNkd_ptr annReadTree(
 	else {
 		annError("Illegal node type in dump file", ANNabort);
     return NULL;            // to keep the compiler happy
-#ifndef RANN
+#ifndef FastKNN
 		exit(0);								// to keep the compiler happy
 #endif
 	}
