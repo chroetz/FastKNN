@@ -13,11 +13,3 @@ destroyKnnTree <- function(pointers) {
     invisible(.Call(`_RANN_destroyKnnTree`, pointers))
 }
 
-makeDouble <- function(x) {
-    .Call(`_RANN_makeDouble`, x)
-}
-
-squareDouble <- function(x) {
-    .Call(`_RANN_squareDouble`, x)
-}
-

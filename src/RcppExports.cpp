@@ -45,35 +45,11 @@ BEGIN_RCPP
     return R_NilValue;
 END_RCPP
 }
-// makeDouble
-SEXP makeDouble(double x);
-RcppExport SEXP _RANN_makeDouble(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< double >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(makeDouble(x));
-    return rcpp_result_gen;
-END_RCPP
-}
-// squareDouble
-double squareDouble(SEXP x);
-RcppExport SEXP _RANN_squareDouble(SEXP xSEXP) {
-BEGIN_RCPP
-    Rcpp::RObject rcpp_result_gen;
-    Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< SEXP >::type x(xSEXP);
-    rcpp_result_gen = Rcpp::wrap(squareDouble(x));
-    return rcpp_result_gen;
-END_RCPP
-}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_RANN_buildKnnTree", (DL_FUNC) &_RANN_buildKnnTree, 2},
     {"_RANN_queryKnnTree", (DL_FUNC) &_RANN_queryKnnTree, 3},
     {"_RANN_destroyKnnTree", (DL_FUNC) &_RANN_destroyKnnTree, 1},
-    {"_RANN_makeDouble", (DL_FUNC) &_RANN_makeDouble, 1},
-    {"_RANN_squareDouble", (DL_FUNC) &_RANN_squareDouble, 1},
     {NULL, NULL, 0}
 };
 
