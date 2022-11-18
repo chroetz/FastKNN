@@ -1,5 +1,11 @@
 #' @export
 buildKnnFunction <- function(target, k) {
+  
+  # Remove rows containing NA.
+  naRows <- apply(target, 1, \(x) any(is.na(x)))
+  target <- target[!naRows, ]
+    
+  # Separately treat the case of <= k target points.
   if (k >= nrow(target)) {
     return(
       function(query) {
@@ -9,6 +15,8 @@ buildKnnFunction <- function(target, k) {
       }
     )
   }
+  
+  # Use kdTree.
   pointers <- buildKnnTree(target, k)
   function(query) {
     if (is.null(pointers)) stop("The knnFunction is not valid. It may have been deleted.")
@@ -16,7 +24,9 @@ buildKnnFunction <- function(target, k) {
     res$idx <- res$idx + 1
     return(res)
   }
+  
 }
+
 
 #' @export
 deleteQueryFunction <- function(queryFunction) {
