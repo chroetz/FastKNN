@@ -1,9 +1,10 @@
 #' @export
-buildKnnFunction <- function(target, k) {
+buildKnnFunction <- function(target, k, removeNaRows = TRUE) {
   
-  # Remove rows containing NA.
-  naRows <- apply(target, 1, \(x) any(is.na(x)))
-  target <- target[!naRows, ]
+  if (removeNaRows) {
+    naRows <- apply(target, 1, \(x) any(is.na(x)))
+    target <- target[!naRows, ]
+  }
     
   # Separately treat the case of <= k target points.
   if (k >= nrow(target)) {
